@@ -1,0 +1,10 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: BiscutDB
+Bundle-SymbolicName: BiscutDB
+Bundle-Version: 5.1.6
+Bundle-Activator: biscutdb.Activator
+Automatic-Module-Name: BiscutDB
+Import-Package: com.mysql.jdbc,
+ org.osgi.framework;version="1.3.0"
+Export-Package: biscutdb

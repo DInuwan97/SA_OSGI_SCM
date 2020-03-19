@@ -1,0 +1,10 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: BiscutTranspotation
+Bundle-SymbolicName: BiscutTranspotation
+Bundle-Version: 1.0.0.qualifier
+Bundle-Activator: biscuttranspotation.Activator
+Automatic-Module-Name: BiscutTranspotation
+Import-Package: ManufacturedBiscutTranspotation,
+ biscutmanafacture,
+ org.osgi.framework;version="1.3.0"

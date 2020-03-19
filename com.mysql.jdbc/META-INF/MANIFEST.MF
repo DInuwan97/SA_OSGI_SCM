@@ -1,0 +1,44 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: MySQL Connector/j
+Bundle-SymbolicName: com.mysql.jdbc
+Bundle-Version: 5.1.6
+Bundle-Vendor: MyCompany.com
+Automatic-Module-Name: com.mysql.jdbc
+Bundle-RequiredExecutionEnvironment: JavaSE-11
+Export-Package: com.mysql.fabric,
+ com.mysql.fabric.hibernate,
+ com.mysql.fabric.jdbc,
+ com.mysql.fabric.proto.xmlrpc,
+ com.mysql.fabric.xmlrpc,
+ com.mysql.fabric.xmlrpc.base,
+ com.mysql.fabric.xmlrpc.exceptions,
+ com.mysql.jdbc,
+ com.mysql.jdbc.authentication,
+ com.mysql.jdbc.exceptions,
+ com.mysql.jdbc.exceptions.jdbc4,
+ com.mysql.jdbc.integration.c3p0,
+ com.mysql.jdbc.integration.jboss,
+ com.mysql.jdbc.interceptors,
+ com.mysql.jdbc.jdbc2.optional,
+ com.mysql.jdbc.jmx,
+ com.mysql.jdbc.log,
+ com.mysql.jdbc.profiler,
+ com.mysql.jdbc.util,
+ org.gjt.mm.mysql
+Import-Package: javax.net,javax.net.ssl;version="[1.0.1, 2.0.0)";resolution:=optional,
+ javax.xml.parsers, 
+ javax.xml.stream,
+ javax.xml.transform,
+ javax.xml.transform.dom,
+ javax.xml.transform.sax,
+ javax.xml.transform.stax,
+ javax.xml.transform.stream,
+ org.w3c.dom,
+ org.xml.sax,
+ org.xml.sax.helpers;resolution:=optional,
+ javax.naming,javax.naming.spi,javax.sql,
+ javax.transaction.xa;version="[1.0.1, 2.0.0)";resolution:=optional,
+ com.mchange.v2.c3p0;version="[0.9.1.2, 1.0.0)";resolution:=optional,
+ org.jboss.resource.adapter.jdbc;resolution:=optional,
+ org.jboss.resource.adapter.jdbc.vendor;resolution:=optional

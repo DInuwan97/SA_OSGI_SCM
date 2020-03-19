@@ -1,0 +1,11 @@
+CREATE TABLE `biscuitfactory`.`manufacturedetails` (
+  `manufactureId` INT NOT NULL AUTO_INCREMENT,
+  `manufactureDate` VARCHAR(200) NOT NULL,
+  `expireDate` VARCHAR(200) NOT NULL,
+  `biscutName` VARCHAR(100) NOT NULL,
+  `materials` TEXT NOT NULL,
+  `noOfMachines` INT NOT NULL,
+  `noOfEmployees` INT NOT NULL,
+  `manaufactAmount` INT NOT NULL,
+  `demandReqId` INT NOT NULL,
+  PRIMARY KEY (`manufactureId`));
