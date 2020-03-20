@@ -17,7 +17,7 @@ public class Activator implements BundleActivator {
 		
 		serviceRegistration1 = context.registerService(IDB.class.getName(),db,null);
 		
-		//db.dbConn();
+		db.dbConn();
 		
 	}
 

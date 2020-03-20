@@ -14,7 +14,7 @@ import java.awt.Image;
 
 import javax.swing.JTextField;
 
-import biscutfactorygui.BackEndManufactureBiscutDetails;
+import biscutfactorygui.BackEndDetails;
 import biscutfactorygui.IBackEnd;
 import biscutmanafacture.BiscutModel;
 import biscutmanafacture.IOBiscutDetails;
@@ -68,6 +68,10 @@ public class BiscutManufactureDetailsGUI extends JFrame implements GUI{
 
 	public BiscutManufactureDetailsGUI(ManufactureStore manufactureStore,BiscutModel biscutModel) {
 		initialize(manufactureStore,biscutModel);	
+		
+	}
+	
+	public BiscutManufactureDetailsGUI() {
 		
 	}
 	
@@ -189,7 +193,7 @@ public class BiscutManufactureDetailsGUI extends JFrame implements GUI{
 				manufactureStore.createBiscut(categories.getSelectedItem().toString(), biscutModel);
 				
 				IOBiscutDetails ioBiscutDetails = new IOBiscutDetails();
-				IBackEnd backEndManufactureBiscutDetails = new BackEndManufactureBiscutDetails();
+				IBackEnd backEndManufactureBiscutDetails = new BackEndDetails();
 				
 				try {
 					//ask to save 

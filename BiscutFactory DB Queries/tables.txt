@@ -9,3 +9,24 @@ CREATE TABLE `biscuitfactory`.`manufacturedetails` (
   `manaufactAmount` INT NOT NULL,
   `demandReqId` INT NOT NULL,
   PRIMARY KEY (`manufactureId`));
+
+
+
+
+CREATE TABLE `biscuitfactory`.`msginfo` (
+  `msgId` INT NOT NULL AUTO_INCREMENT,
+  `salesId` INT NOT NULL,
+  `message` TEXT NOT NULL,
+  `addedDate` VARCHAR(200) NULL,
+  `addedTime` VARCHAR(200) NULL,
+  PRIMARY KEY (`msgId`));
+
+
+
+CREATE TABLE `biscuitfactory`.`demandrequests` (
+  `demandReqId` INT NOT NULL AUTO_INCREMENT,
+  `productdetails` TEXT NOT NULL,
+  `demadReason` TEXT NOT NULL,
+  `salesMsgId` INT NOT NULL,
+  `reqDate` VARCHAR(100) NOT NULL,
+  PRIMARY KEY (`demandReqId`));
