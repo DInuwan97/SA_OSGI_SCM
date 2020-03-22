@@ -10,5 +10,5 @@ public interface IBackEnd {
 	public ResultSet LoadSalesMessages();
 	public int getSalesMessageCount();
 	public ResultSet getSelectedSalesMessage(int id);
-	public boolean insertDemandReq(DemandRequestDataModel demandRequestDataModel);
+
 }

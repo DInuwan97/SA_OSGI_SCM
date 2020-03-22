@@ -1,5 +1,6 @@
 package biscutmanafacture;
 
 public interface ManufactureStore {
-	public BasicBiscut createBiscut(String biscutName,BiscutModel biscutModel);
+	public BasicBiscut createBiscut(BiscutModel biscutModel);
+	public boolean isBiscutProductionInsertered();
 }

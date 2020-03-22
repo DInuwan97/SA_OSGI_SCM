@@ -7,17 +7,24 @@ import javax.swing.JPopupMenu;
 import java.awt.Component;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.Vector;
+
 import javax.swing.JLabel;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Image;
 
 import javax.swing.JTextField;
+import javax.swing.table.DefaultTableModel;
 
 import biscutfactorygui.BackEndDetails;
 import biscutfactorygui.IBackEnd;
 import biscutmanafacture.BiscutModel;
+import biscutmanafacture.IBiscuitManufactureDBQuries;
 import biscutmanafacture.IOBiscutDetails;
+import biscutmanafacture.ManufactureBiscuitDBQueries;
 import biscutmanafacture.ManufactureStore;
 
 
@@ -30,8 +37,12 @@ import java.awt.event.ItemListener;
 import java.awt.event.ItemEvent;
 import javax.swing.JMenuBar;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JTable;
+import java.awt.Window.Type;
+import javax.swing.JScrollPane;
 
-public class BiscutManufactureDetailsGUI extends JFrame implements GUI{
+public class BiscutManufactureDetailsGUI extends JFrame{
 
 	
 
@@ -43,17 +54,19 @@ public class BiscutManufactureDetailsGUI extends JFrame implements GUI{
 	private JTextField txtIngredients;
 	private JTextField txtMachines;
 	private JTextField txtEmployees;
+	private JTable table;
 
 	/**
 	 * Launch the application.
 	 */
-	public void executeMainGUI(ManufactureStore manufactureStore,BiscutModel biscutModel) {
+	public void executeMainGUI(ManufactureStore manufactureStore) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					BiscutManufactureDetailsGUI window = new BiscutManufactureDetailsGUI(manufactureStore,biscutModel);
+					BiscutManufactureDetailsGUI window = new BiscutManufactureDetailsGUI(manufactureStore);
+					
 					window.frame.setVisible(true);
-					initialize(manufactureStore,biscutModel);
+					initialize(manufactureStore);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -66,23 +79,47 @@ public class BiscutManufactureDetailsGUI extends JFrame implements GUI{
 	 */
 	
 
-	public BiscutManufactureDetailsGUI(ManufactureStore manufactureStore,BiscutModel biscutModel) {
-		initialize(manufactureStore,biscutModel);	
+	public BiscutManufactureDetailsGUI(ManufactureStore manufactureStore) {
+		initialize(manufactureStore);	
+
+//		DefaultTableModel dtm = (DefaultTableModel) table.getModel();
+//		Vector v = new Vector();
+//		
+//		IBiscuitManufactureDBQuries iBiscuitManufactureDBQuries = new ManufactureBiscuitDBQueries();
+//		ResultSet rs2 = iBiscuitManufactureDBQuries.getAllManfautureProducts();
+//		
+//		try {
+//			while(rs2.next()) {
+//				v.add(rs2.getString("demandReqId"));
+//				v.add(rs2.getString("reqDate"));
+//				v.add(rs2.getString("demadReason"));
+//			}
+//			
+//			dtm.addRow(v);
+//		} catch (SQLException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//		
 		
 	}
 	
-	public BiscutManufactureDetailsGUI() {
-		
-	}
+
 	
 	
 
 	/**
 	 * Initialize the contents of the frame.
 	 */
-	public void initialize(ManufactureStore manufactureStore,BiscutModel biscutModel) {
+	public void initialize(ManufactureStore manufactureStore) {
+		
+		
+		
 		frame = new JFrame();
-		frame.setBounds(100, 100, 862, 690);
+		frame.setType(Type.POPUP);
+		frame.setAlwaysOnTop(true);
+		frame.setBounds(0, 0, 1366, 768);
+		frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
@@ -185,15 +222,46 @@ public class BiscutManufactureDetailsGUI extends JFrame implements GUI{
 		menuBar.setBounds(24, 514, 101, 22);
 		frame.getContentPane().add(menuBar);
 		
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(734, 123, 758, 289);
+		frame.getContentPane().add(scrollPane);
 		
+		table = new JTable();
+		scrollPane.setViewportView(table);
+
+//			
+		
+		Vector v = new Vector();
+		
+		IBiscuitManufactureDBQuries iBiscuitManufactureDBQuries = new ManufactureBiscuitDBQueries();
+		ResultSet rs2 = iBiscuitManufactureDBQuries.getAllManfautureProducts();
+		DefaultTableModel dtm = (DefaultTableModel) table.getModel();
+		try {
+			while(rs2.next()) {
+				
+				v.add(rs2.getString("demandReqId"));
+				v.add(rs2.getString("reqDate"));
+				v.add(rs2.getString("demadReason"));
+				dtm.addRow(v);
+			}
+			
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+		
+		
+		
+		BiscutModel biscutModel = new BiscutModel();
 		
 		//event handler for the ADDPRODUCT Button
 		btnAddProduct.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				manufactureStore.createBiscut(categories.getSelectedItem().toString(), biscutModel);
 				
-				IOBiscutDetails ioBiscutDetails = new IOBiscutDetails();
-				IBackEnd backEndManufactureBiscutDetails = new BackEndDetails();
+
 				
 				try {
 					//ask to save 
@@ -209,12 +277,15 @@ public class BiscutManufactureDetailsGUI extends JFrame implements GUI{
 						biscutModel.setNoOfMachines(Integer.parseInt(txtMachines.getText()));
 						biscutModel.setNumOfEmployees(Integer.parseInt(txtEmployees.getText()));
 						
+						
+						manufactureStore.createBiscut(biscutModel);
+						
 						//getting ack after insert to db
-						Boolean result =  backEndManufactureBiscutDetails.InsertBiscutManufactureDetails(biscutModel);
+						Boolean result =  manufactureStore.isBiscutProductionInsertered();
 						
 						if(result == true) {
 							JOptionPane.showMessageDialog(rootPane, "Successfully Added!!!");
-							ioBiscutDetails.OutPutBiscutDetails(biscutModel);	//display enterd product details in console
+							//ioBiscutDetails.OutPutBiscutDetails(biscutModel);	//display enterd product details in console
 						}else {
 							JOptionPane.showMessageDialog(rootPane, "Fail to Add!!!");
 						}

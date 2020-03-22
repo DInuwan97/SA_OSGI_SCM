@@ -2,18 +2,14 @@ package biscutmanafacture;
 
 public class LemonPuff extends BasicBiscut {
 	
-	public LemonPuff(String biscutName) {
 	
-		System.out.println("Selected Category : " +biscutName);
-		
-		//IOBiscutDetails ioBiscutDetails = new IOBiscutDetails();
-		
-		//ioBiscutDetails.InputBiscutDetails(biscutModel,biscutName);
+	public LemonPuff(BiscutModel biscutModel) {
 	
+		System.out.println("Selected Category : " +biscutModel.getBiscutName());
 		
-		//ioBiscutDetails.OutPutBiscutDetails(biscutModel);
-		
-		
+		IOBiscutDetails ioBiscutDetails = new IOBiscutDetails();	
+		isDataInsertedDb = (boolean) ioBiscutDetails.InputBiscutDetails(biscutModel);
+	
 	}
 
 }

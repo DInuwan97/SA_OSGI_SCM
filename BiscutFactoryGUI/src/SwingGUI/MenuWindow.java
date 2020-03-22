@@ -49,8 +49,9 @@ public class MenuWindow extends JFrame{
 	 */
 	private void initialize() {
 		frame = new JFrame();
-		frame.setBounds(100, 100, 1182, 689);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setBounds(0, 0, 1366, 768);
+		frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
 		JButton btnManufact = new JButton("Manufacture");
@@ -66,17 +67,16 @@ public class MenuWindow extends JFrame{
 		frame.getContentPane().add(btnDemand);
 		
 		
-		
-		
-		
+
 		//Add Manufacture Product
 		btnManufact.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				ManufactureStore manufactureStore = new BiscutManafactureJunction();
 				BiscutModel biscutModel = new BiscutModel();
-				BiscutManufactureDetailsGUI biscutManufactureDetailsGUI = new BiscutManufactureDetailsGUI(manufactureStore, biscutModel);
-				biscutManufactureDetailsGUI.executeMainGUI(manufactureStore, biscutModel);
-				displayManufactureGUI();
+				BiscutManufactureDetailsGUI biscutManufactureDetailsGUI = new BiscutManufactureDetailsGUI(manufactureStore);
+				biscutManufactureDetailsGUI.executeMainGUI(manufactureStore);
+				frame.setVisible(false);
+				//displayManufactureGUI();
 				
 			}
 		});
@@ -95,9 +95,9 @@ public class MenuWindow extends JFrame{
 		});
 	}
 	
-	public void displayManufactureGUI() {
-		new BiscutManufactureDetailsGUI().setVisible(true);
-		dispose();
-	}
+//	public void displayManufactureGUI() {
+//		new BiscutManufactureDetailsGUI().setVisible(true);
+//		frame.setVisible(false);
+//	}
 
 }

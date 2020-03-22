@@ -2,15 +2,10 @@ package biscutmanafacture;
 
 public class IOBiscutDetails {
 	
-	public void InputBiscutDetails(BiscutModel biscutModel,String biscutName) { 
+	public boolean InputBiscutDetails(BiscutModel biscutModel) { 
 		
-		biscutModel.setBiscutName(biscutName);
-		biscutModel.setExpireDate("2020/12/05");
-		biscutModel.setIngridents("Water,Sugar,Milik");
-		biscutModel.setManufactAmount(100);
-		biscutModel.setManufactureDate("2020/03/18");
-		biscutModel.setNoOfMachines(60);
-		biscutModel.setNumOfEmployees(20);
+		ManufactureBiscuitDBQueries manufactureBiscuitDBQueries = new ManufactureBiscuitDBQueries();
+		return manufactureBiscuitDBQueries.InsertBiscutManufactureDetails(biscutModel);
 	}
 	
 	public void OutPutBiscutDetails(BiscutModel biscutModel) {

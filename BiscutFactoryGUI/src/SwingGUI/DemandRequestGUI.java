@@ -15,9 +15,12 @@ import javax.swing.JComboBox;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
+import DemandSales.DemandRequestDBQueries;
 import DemandSales.Idemand;
+import DemandSales.IdemandRequstDBQueries;
 import DemandSales.SalesDemandJunction;
 import DemandSales.SalesDemandMsgModel;
+import DemandSales.SalesMessageDetailsModel;
 import biscutfactorygui.BackEndDetails;
 import biscutfactorygui.BackEndMessageDetailsModel;
 import biscutfactorygui.DemandRequestDataModel;
@@ -92,7 +95,8 @@ public class DemandRequestGUI {
 	 */
 	private void initialize(Idemand iDemand) {
 		frame = new JFrame();
-		frame.setBounds(100, 100, 1213, 736);
+		frame.setBounds(0, 0, 1366, 768);
+		frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
@@ -202,7 +206,7 @@ public class DemandRequestGUI {
 		
 		//creating the reference of SQL Backend
 		iBackEnd = new BackEndDetails();
-		
+		IdemandRequstDBQueries idemandRequstDBQueries = new DemandRequestDBQueries();
 	
 		
 		
@@ -210,7 +214,7 @@ public class DemandRequestGUI {
 		try {
 			ResultSet rs = iBackEnd.LoadSalesMessages();
 			while(rs.next()) {
-				//comboBox.addItem(rs.getString("salesID")+ " : " +rs.getString("addedDate")+ " @ " +rs.getString("addedTime"));
+				
 				comboBox.addItem(rs.getString("msgId"));
 
 			}
@@ -218,7 +222,6 @@ public class DemandRequestGUI {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
 		
 		
 		//check select---future
@@ -229,7 +232,7 @@ public class DemandRequestGUI {
 						
 						try {
 						
-							ResultSet rs1 = iBackEnd.getSelectedSalesMessage(Integer.parseInt(comboBox.getSelectedItem().toString()));
+							ResultSet rs1 = idemandRequstDBQueries.getSelectedSalesMessage(Integer.parseInt(comboBox.getSelectedItem().toString()));
 							
 							if(rs1.next()) {
 								txtDescription.setText(rs1.getString("message")); 
@@ -275,7 +278,7 @@ public class DemandRequestGUI {
 			
 			try {
 				//if doen t use true,file will wb updating to latest modifiction that have been given
-				fileWriter = new FileWriter("E:\\SLIIT\\3rd Year\\Semester 1\\3rd yr SE\\SA - Software Architecture\\Assignment\\Biscut Factory\\BiscutDemand\\dataFiles\\demandReq.txt",true); 
+				fileWriter = new FileWriter("E:\\SLIIT\\3rd Year\\Semester 1\\3rd yr SE\\SA - Software Architecture\\Assignment\\SCM Assg 1\\SA_OSGI_SCM\\BiscutDemand\\dataFiles\\demandReq.txt",true); 
 				printWriter = new PrintWriter(fileWriter);
 				printWriter.print(textToAppend);  //New line
 			    printWriter.close();
@@ -316,13 +319,10 @@ public class DemandRequestGUI {
 		btnAddDemand.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				//iDemand.getSalesMsg(salesMessageId);
-				//SalesDemandMsgModel salesDemandMsgModel = new
-				DemandRequestDataModel demandRequestDataModel = new DemandRequestDataModel();
-				
+				SalesDemandMsgModel salesDemandMsgModel = new SalesDemandMsgModel();				
 			 
 				try {
-					fis = new FileInputStream("E:\\SLIIT\\3rd Year\\Semester 1\\3rd yr SE\\SA - Software Architecture\\Assignment\\Biscut Factory\\BiscutDemand\\dataFiles\\demandReq.txt");
+					fis = new FileInputStream("E:\\SLIIT\\3rd Year\\Semester 1\\3rd yr SE\\SA - Software Architecture\\Assignment\\SCM Assg 1\\SA_OSGI_SCM\\BiscutDemand\\dataFiles\\demandReq.txt");
 					
 						try {
 							dis = new DataInputStream(fis);
@@ -343,21 +343,22 @@ public class DemandRequestGUI {
 					int x = JOptionPane.showConfirmDialog(null, "Do Yu want to save this record?");
 					
 					if(x==0) {
+			
 						
 						//setting values to the demand request textfileds and call setters
-						demandRequestDataModel.setMsgId(Integer.parseInt(comboBox.getSelectedItem().toString()));
-						demandRequestDataModel.setReqDate(txtReqDate.getText());
-						demandRequestDataModel.setDemandRequest(fileData);
-						demandRequestDataModel.setDescription(textReason.getText());
+						salesDemandMsgModel.setMsgId(Integer.parseInt(comboBox.getSelectedItem().toString()));
+						salesDemandMsgModel.setReqDate(txtReqDate.getText());
+						salesDemandMsgModel.setDemandRequest(fileData);
+						salesDemandMsgModel.setDescription(textReason.getText());
 						
-						
-						Boolean result = iBackEnd.insertDemandReq(demandRequestDataModel);
+
+						Boolean result = idemandRequstDBQueries.insertDemandReq(salesDemandMsgModel);
 						if(result == true) {
+							
 							//send to the BiscutDemand Bundle
 							JOptionPane.showMessageDialog(null, "Successfully Added!!!");
-							iDemand.getSalesMsg(demandRequestDataModel.getMsgId(),demandRequestDataModel.getReqDate(),demandRequestDataModel.getDemandRequest(),demandRequestDataModel.getDescription());
-
-						      ////////////////////////////////////////////Deleting the file////////////
+							
+						    ////////////////////////////////////////////Deleting the file////////////
 							deleteCurrentFile();
 	
 						}else {
@@ -372,11 +373,7 @@ public class DemandRequestGUI {
 					ex.printStackTrace();
 				}
 				
-				
-				
-			
 	
-				
 			}
 		});
 		

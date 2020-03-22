@@ -6,19 +6,21 @@ import org.osgi.framework.ServiceReference;
 import org.osgi.framework.ServiceRegistration;
 
 import DemandSales.Idemand;
+import DemandSales.IdemandRequstDBQueries;
 import SwingGUI.BiscutManufactureDetailsGUI;
 import SwingGUI.DemandRequestGUI;
 import SwingGUI.GUI;
 import SwingGUI.MenuWindow;
 import biscutdb.IDB;
 import biscutmanafacture.BiscutModel;
+import biscutmanafacture.IBiscuitManufactureDBQuries;
 import biscutmanafacture.ManufactureStore;
 
 public class Activator implements BundleActivator {
 
 	
 	
-	ServiceReference serviceReference1,serviceReference2;
+	ServiceReference serviceReference1,serviceReference2,serviceReference3,serviceReference4;
 	ServiceReference serviceReferenceDb;
 	
 	public void start(BundleContext context) throws Exception {
@@ -33,11 +35,21 @@ public class Activator implements BundleActivator {
 		serviceReference1 = context.getServiceReference(ManufactureStore.class.getName());
 		ManufactureStore manufactureStore = (ManufactureStore)context.getService(serviceReference1);
 		
-	
+		
+		//Demand Bunddle
+		
 		//demand request reference
 		serviceReference2 = context.getServiceReference(Idemand.class.getName());
 		Idemand iDemand = (Idemand)context.getService(serviceReference2);
 		
+		//demand DBQueries reference
+		serviceReference3 = context.getServiceReference(IdemandRequstDBQueries.class.getName());
+		IdemandRequstDBQueries idemandRequstDBQueries = (IdemandRequstDBQueries)context.getService(serviceReference3);
+		
+		
+		//getting DBQeries from manufature
+		serviceReference4 = context.getServiceReference(IBiscuitManufactureDBQuries.class.getName());
+		IBiscuitManufactureDBQuries idBiscuitManufactureDBQuries = (IBiscuitManufactureDBQuries)context.getService(serviceReference4);
 		//execute main window
 		MenuWindow menuWindow = new MenuWindow();
 		menuWindow.executeMenuWindow();
@@ -62,6 +74,8 @@ public class Activator implements BundleActivator {
 		//DemandRequestGUI.deleteCurrentFile();
 		context.ungetService(serviceReference1);
 		context.ungetService(serviceReference2);
+		context.ungetService(serviceReference3);
+		context.ungetService(serviceReference4);
 	}
 
 }

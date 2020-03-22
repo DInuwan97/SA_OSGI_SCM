@@ -1,0 +1,45 @@
+package Quality;
+
+public class DemandQualityApprovalModel {
+
+	private int demandReqId;
+	private String productDetails;
+	private String demandReason;
+	private String reqDate;
+	private boolean approvalState;
+	
+	public int getDemandReqId() {
+		return demandReqId;
+	}
+	public void setDemandReqId(int demandReqId) {
+		this.demandReqId = demandReqId;
+	}
+	public String getProductDetails() {
+		return productDetails;
+	}
+	public void setProductDetails(String productDetails) {
+		this.productDetails = productDetails;
+	}
+	public String getDemandReason() {
+		return demandReason;
+	}
+	public void setDemandReason(String demandReason) {
+		this.demandReason = demandReason;
+	}
+	public String getReqDate() {
+		return reqDate;
+	}
+	public void setReqDate(String reqDate) {
+		this.reqDate = reqDate;
+	}
+	public boolean isApprovalState() {
+		return approvalState;
+	}
+	public void setApprovalState(boolean approvalState) {
+		this.approvalState = approvalState;
+	}
+	
+	
+	
+	
+}
