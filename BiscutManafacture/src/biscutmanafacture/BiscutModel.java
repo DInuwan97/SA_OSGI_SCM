@@ -2,6 +2,7 @@ package biscutmanafacture;
 
 public class BiscutModel {
 	
+	private int manufactId;
 	private String biscutName;
 	private String manufactureDate;
 	private String expireDate;
@@ -9,7 +10,22 @@ public class BiscutModel {
 	private int numOfEmployees;
 	private int noOfMachines;
 	private String ingridents;
+	private int demandReqId;
 	
+	
+	
+	public int getManufactId() {
+		return manufactId;
+	}
+	public void setManufactId(int manufactId) {
+		this.manufactId = manufactId;
+	}
+	public int getDemandReqId() {
+		return demandReqId;
+	}
+	public void setDemandReqId(int demandReqId) {
+		this.demandReqId = demandReqId;
+	}
 	public String getBiscutName() {
 		return biscutName;
 	}

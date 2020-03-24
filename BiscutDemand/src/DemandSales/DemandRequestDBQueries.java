@@ -6,6 +6,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
+import javax.swing.JOptionPane;
+
 import biscutdb.DB;
 import biscutdb.IDB;
 
@@ -46,6 +48,42 @@ public class DemandRequestDBQueries implements IdemandRequstDBQueries {
 	public ResultSet getSelectedSalesMessage(int id) {
 		// TODO Auto-generated method stub
 		String sql = "SELECT * FROM msgInfo WHERE msgID = '"+id+"' ";
+		
+		try {
+			
+			statement = conn.createStatement();
+			resultSet = statement.executeQuery(sql);
+			
+		}catch(SQLException ex) {
+			ex.printStackTrace();
+		}
+		
+		return resultSet;
+	}
+
+	@Override
+	public boolean deleteSalesMsg(int id) {
+		// TODO Auto-generated method stub
+		
+		String sql= "DELETE FROM msgInfo WHERE msgId = '"+id+"'";
+		
+		try {
+			statement = conn.createStatement();
+			statement.executeUpdate(sql);
+			return true;
+		}
+		catch(SQLException ex) {
+			ex.printStackTrace();
+			return false;
+		}
+		
+	}
+
+	@Override
+	public ResultSet viewDemandsOnDate(SalesMessageDetailsModel salesDemandMsgModel) {
+		// TODO Auto-generated method stub
+		
+		String sql = "SELECT * FROM demandrequests WHERE reqDate BETWEEN '"+salesDemandMsgModel.getDate_1()+"' AND '"+salesDemandMsgModel.getDate_2()+"' ";
 		
 		try {
 			

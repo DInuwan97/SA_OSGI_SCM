@@ -10,7 +10,21 @@ public class SalesMessageDetailsModel {
 	private String addedTine;
 	private String demandAcceptConfirmation;
 	
+	private String date_1,date_2;
 	
+	
+	public String getDate_1() {
+		return date_1;
+	}
+	public void setDate_1(String date_1) {
+		this.date_1 = date_1;
+	}
+	public String getDate_2() {
+		return date_2;
+	}
+	public void setDate_2(String date_2) {
+		this.date_2 = date_2;
+	}
 	public int getMsgId() {
 		return msgId;
 	}

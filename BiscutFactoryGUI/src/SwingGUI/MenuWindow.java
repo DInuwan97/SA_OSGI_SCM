@@ -24,11 +24,11 @@ public class MenuWindow extends JFrame{
 	/**
 	 * Launch the application.
 	 */
-	public void executeMenuWindow() {
+	public static void executeMenuWindow() {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					MenuWindow window = new MenuWindow();
+					MenuWindow window = new MenuWindow("hello");
 					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -40,7 +40,7 @@ public class MenuWindow extends JFrame{
 	/**
 	 * Create the application.
 	 */
-	public MenuWindow() {
+	public MenuWindow(String msg) {
 		initialize();
 	}
 
@@ -57,14 +57,57 @@ public class MenuWindow extends JFrame{
 		JButton btnManufact = new JButton("Manufacture");
 	
 		btnManufact.setFont(new Font("Tahoma", Font.BOLD, 30));
-		btnManufact.setBounds(336, 377, 437, 62);
+		btnManufact.setBounds(555, 238, 437, 62);
 		frame.getContentPane().add(btnManufact);
 		
 		JButton btnDemand = new JButton("Demand Forecasting");
 	
 		btnDemand.setFont(new Font("Tahoma", Font.BOLD, 30));
-		btnDemand.setBounds(336, 245, 437, 62);
+		btnDemand.setBounds(56, 238, 437, 62);
 		frame.getContentPane().add(btnDemand);
+		
+		JButton btnWearhousing = new JButton("Wearhousing");
+		btnWearhousing.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		btnWearhousing.setFont(new Font("Tahoma", Font.BOLD, 30));
+		btnWearhousing.setBounds(1046, 238, 437, 62);
+		frame.getContentPane().add(btnWearhousing);
+		
+		JButton btnSalesForecasting = new JButton("Sales Forecasting");
+		btnSalesForecasting.setFont(new Font("Tahoma", Font.BOLD, 30));
+		btnSalesForecasting.setBounds(56, 383, 437, 62);
+		frame.getContentPane().add(btnSalesForecasting);
+		
+		JButton btnTransportManagement = new JButton("Transport Management");
+		btnTransportManagement.setFont(new Font("Tahoma", Font.BOLD, 30));
+		btnTransportManagement.setBounds(555, 383, 437, 62);
+		frame.getContentPane().add(btnTransportManagement);
+		
+		JButton btnLogisticManagement = new JButton("Logistics Management");
+		btnLogisticManagement.setFont(new Font("Tahoma", Font.BOLD, 30));
+		btnLogisticManagement.setBounds(1046, 383, 437, 62);
+		frame.getContentPane().add(btnLogisticManagement);
+		
+		JButton btnCustomerSatisfactions = new JButton("Customer Satisfactions");
+		btnCustomerSatisfactions.setFont(new Font("Tahoma", Font.BOLD, 30));
+		btnCustomerSatisfactions.setBounds(1046, 524, 437, 62);
+		frame.getContentPane().add(btnCustomerSatisfactions);
+		
+		JButton btnQualityAssurance = new JButton("Quality Assurance");
+		btnQualityAssurance.setFont(new Font("Tahoma", Font.BOLD, 30));
+		btnQualityAssurance.setBounds(555, 524, 437, 62);
+		frame.getContentPane().add(btnQualityAssurance);
+		
+		JButton btnFinaceManagement = new JButton("Finace Management");
+		btnFinaceManagement.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		btnFinaceManagement.setFont(new Font("Tahoma", Font.BOLD, 30));
+		btnFinaceManagement.setBounds(56, 524, 437, 62);
+		frame.getContentPane().add(btnFinaceManagement);
 		
 		
 
@@ -72,9 +115,7 @@ public class MenuWindow extends JFrame{
 		btnManufact.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				ManufactureStore manufactureStore = new BiscutManafactureJunction();
-				BiscutModel biscutModel = new BiscutModel();
-				BiscutManufactureDetailsGUI biscutManufactureDetailsGUI = new BiscutManufactureDetailsGUI(manufactureStore);
-				biscutManufactureDetailsGUI.executeMainGUI(manufactureStore);
+				BiscutManufactureDetailsGUI.executeMainGUI(manufactureStore);
 				frame.setVisible(false);
 				//displayManufactureGUI();
 				
@@ -87,9 +128,7 @@ public class MenuWindow extends JFrame{
 			public void actionPerformed(ActionEvent e) {
 				
 				Idemand iDemand = new SalesDemandJunction();
-				SalesDemandMsgModel salesDemandMsgModel = new SalesDemandMsgModel();
-				DemandRequestGUI demandRequestGUI = new DemandRequestGUI(iDemand);
-				demandRequestGUI.executeDemandGUI(iDemand);
+				DemandRequestGUI.executeDemandGUI(iDemand);
 							
 			}
 		});

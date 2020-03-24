@@ -7,21 +7,27 @@ import org.osgi.framework.ServiceRegistration;
 
 import DemandSales.Idemand;
 import DemandSales.IdemandRequstDBQueries;
+import Quality.IDemandQualityApproval;
 import SwingGUI.BiscutManufactureDetailsGUI;
 import SwingGUI.DemandRequestGUI;
 import SwingGUI.GUI;
 import SwingGUI.MenuWindow;
+import SwingGUI.UserLoginGUI;
+import SwingGUI.Welcome;
 import biscutdb.IDB;
 import biscutmanafacture.BiscutModel;
 import biscutmanafacture.IBiscuitManufactureDBQuries;
 import biscutmanafacture.ManufactureStore;
+import stakeholdermanagement.IStakeHolder;
 
 public class Activator implements BundleActivator {
 
 	
 	
-	ServiceReference serviceReference1,serviceReference2,serviceReference3,serviceReference4;
+	ServiceReference serviceReference1,serviceReference2,serviceReference3,serviceReference4,serviceReference5;
 	ServiceReference serviceReferenceDb;
+	
+	ServiceReference serviceReferenceUser;
 	
 	public void start(BundleContext context) throws Exception {
 		
@@ -46,13 +52,30 @@ public class Activator implements BundleActivator {
 		serviceReference3 = context.getServiceReference(IdemandRequstDBQueries.class.getName());
 		IdemandRequstDBQueries idemandRequstDBQueries = (IdemandRequstDBQueries)context.getService(serviceReference3);
 		
+		//deamdn quality for sachin
+		serviceReference5 = context.getServiceReference(IDemandQualityApproval.class.getName());
+		IDemandQualityApproval iDemandQualityApproval = (IDemandQualityApproval) context.getService(serviceReference5);
+		
 		
 		//getting DBQeries from manufature
 		serviceReference4 = context.getServiceReference(IBiscuitManufactureDBQuries.class.getName());
 		IBiscuitManufactureDBQuries idBiscuitManufactureDBQuries = (IBiscuitManufactureDBQuries)context.getService(serviceReference4);
 		//execute main window
-		MenuWindow menuWindow = new MenuWindow();
-		menuWindow.executeMenuWindow();
+		
+		
+		//uSers
+		serviceReferenceUser = context.getServiceReference(IStakeHolder.class.getName());
+		IStakeHolder iStakeHolder = (IStakeHolder)context.getService(serviceReferenceUser);
+
+		
+		
+		
+		//UserLoginGUI.executeLogin();
+		
+		Welcome welcomeWindow = new Welcome();
+		welcomeWindow.executeWelcomeWindow();
+		//MenuWindow menuWindow = new MenuWindow();
+		//menuWindow.executeMenuWindow();
 		
 		
 //		BiscutModel biscutModel = new BiscutModel();
@@ -60,10 +83,10 @@ public class Activator implements BundleActivator {
 //		biscutManufactureDetailsGUI.executeMainGUI(manufactureStore, biscutModel);
 
 		
-		BackEndMessageDetailsModel bsd = new BackEndMessageDetailsModel();
+		///BackEndMessageDetailsModel bsd = new BackEndMessageDetailsModel();
 		
-		BackEndDetails bc = new BackEndDetails();
-		bc.LoadSalesMessages();
+		//BackEndDetails bc = new BackEndDetails();
+		//bc.LoadSalesMessages();
 		
 		
 		

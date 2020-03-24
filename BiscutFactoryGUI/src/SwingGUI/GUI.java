@@ -4,5 +4,5 @@ import biscutmanafacture.BiscutModel;
 import biscutmanafacture.ManufactureStore;
 
 public interface GUI {
-	public void executeMainGUI(ManufactureStore manufactureStore,BiscutModel biscutModel);
+	public void executeMainGUI(ManufactureStore manufactureStore);
 }
