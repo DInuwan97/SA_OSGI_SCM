@@ -1,0 +1,11 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: TransportationGui
+Bundle-SymbolicName: TransportationGui
+Bundle-Version: 1.0.0.qualifier
+Bundle-Activator: transportationgui.TransportationGUIActivator
+Bundle-RequiredExecutionEnvironment: JavaSE-11
+Automatic-Module-Name: TransportationGui
+Import-Package: org.osgi.framework;version="1.3.0",
+ tranportationpublisher
+Bundle-ActivationPolicy: lazy

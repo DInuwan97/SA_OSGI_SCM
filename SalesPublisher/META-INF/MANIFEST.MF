@@ -1,0 +1,14 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: SalesPublisher
+Bundle-SymbolicName: SalesPublisher
+Bundle-Version: 1.0.0.qualifier
+Bundle-Activator: salespublisher.SalesActivator
+Bundle-RequiredExecutionEnvironment: JavaSE-11
+Automatic-Module-Name: SalesPublisher
+Import-Package: biscutdb,
+ com.sun.jdi.connect.spi,
+ org.osgi.framework;version="1.3.0",
+ tranportationpublisher
+Bundle-ActivationPolicy: lazy
+Export-Package: salespublisher
