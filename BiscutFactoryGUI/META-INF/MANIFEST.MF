@@ -10,11 +10,12 @@ Import-Package: DemandSales,
  biscutdb,
  biscutdemand,
  biscutmanafacture,
+ logistics,
  org.jdatepicker,
  org.jdatepicker.graphics,
  org.jdatepicker.i18n,
  org.jdatepicker.impl,
  org.jdatepicker.util,
  org.osgi.framework;version="1.3.0",
- stakeholdermanagement
+ warehouse
 

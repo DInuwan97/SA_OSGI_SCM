@@ -24,7 +24,6 @@ import org.jdatepicker.impl.JDatePanelImpl;
 import org.jdatepicker.impl.JDatePickerImpl;
 import org.jdatepicker.impl.UtilDateModel;
 
-import com.mysql.jdbc.Connection;
 
 import DemandSales.DemandRequestDBQueries;
 import DemandSales.Idemand;

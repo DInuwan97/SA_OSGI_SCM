@@ -6,9 +6,9 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
-import stakeholdermanagement.IStakeHolder;
-import stakeholdermanagement.StakeHolderDBQueries;
-import stakeholdermanagement.StakeHolderModel;
+//import stakeholdermanagement.IStakeHolder;
+//import stakeholdermanagement.StakeHolderDBQueries;
+//import stakeholdermanagement.StakeHolderModel;
 
 import javax.swing.JButton;
 import java.awt.Font;
@@ -21,8 +21,8 @@ public class UserLoginGUI {
 	private JTextField txtMobile;
 	private JTextField txtPwd;
 	
-	private IStakeHolder iStakeHolder;
-	private StakeHolderModel stakeHolderModel;
+//	private IStakeHolder iStakeHolder;
+//	private StakeHolderModel stakeHolderModel;
 
 	/**
 	 * Launch the application.
@@ -68,29 +68,29 @@ public class UserLoginGUI {
 		frame.getContentPane().add(txtPwd);
 		
 		JButton btnLogin = new JButton("LOGIN");
-		btnLogin.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				
-				
-				iStakeHolder = new StakeHolderDBQueries();
-				stakeHolderModel = new StakeHolderModel();
-				
-				
-				stakeHolderModel.setMobile(txtMobile.getText());
-				stakeHolderModel.setPwd(txtPwd.getText());
-				
-				boolean result = iStakeHolder.loginUser(stakeHolderModel);
-				
-				if(result == true) {				
-					JOptionPane.showMessageDialog(null,"Success!!!");	
-				}else {
-					JOptionPane.showMessageDialog(null,"Fail!!!");	
-				}
-				
-				
-				
-			}
-		});
+//		btnLogin.addActionListener(new ActionListener() {
+//			public void actionPerformed(ActionEvent e) {
+//				
+//				
+//				iStakeHolder = new StakeHolderDBQueries();
+//				stakeHolderModel = new StakeHolderModel();
+//				
+//				
+//				stakeHolderModel.setMobile(txtMobile.getText());
+//				stakeHolderModel.setPwd(txtPwd.getText());
+//				
+//				boolean result = iStakeHolder.loginUser(stakeHolderModel);
+//				
+//				if(result == true) {				
+//					JOptionPane.showMessageDialog(null,"Success!!!");	
+//				}else {
+//					JOptionPane.showMessageDialog(null,"Fail!!!");	
+//				}
+//				
+//				
+//				
+//			}
+//		});
 		btnLogin.setFont(new Font("Times New Roman", Font.BOLD, 15));
 		btnLogin.setBounds(535, 353, 150, 40);
 		frame.getContentPane().add(btnLogin);

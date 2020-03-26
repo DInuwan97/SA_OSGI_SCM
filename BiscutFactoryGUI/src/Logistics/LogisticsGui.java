@@ -1,10 +1,8 @@
 package Logistics;
 
-import java.awt.BorderLayout;
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Properties;
@@ -18,7 +16,6 @@ import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.text.DateFormatter;
 
 import org.jdatepicker.impl.JDatePanelImpl;
 import org.jdatepicker.impl.JDatePickerImpl;
@@ -27,13 +24,15 @@ import org.jdatepicker.impl.UtilDateModel;
 import Warehouse.DateLabelFormatter;
 import logistics.Logistics;
 import logistics.LogisticsDTO;
-import warehouse.RawMaterials;
 import javax.swing.JRadioButton;
-import javax.swing.JRadioButtonMenuItem;
 import javax.swing.JComboBox;
 
 public class LogisticsGui extends JFrame {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JTable table;
 	public static Logistics logistics;
@@ -41,7 +40,7 @@ public class LogisticsGui extends JFrame {
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
+	public  void main() {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
