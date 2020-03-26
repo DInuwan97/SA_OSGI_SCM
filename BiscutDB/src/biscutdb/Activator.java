@@ -8,7 +8,7 @@ import org.osgi.framework.ServiceRegistration;
 
 public class Activator implements BundleActivator {
 
-	ServiceRegistration serviceRegistration1;
+	ServiceRegistration<?> serviceRegistration1;
 	
 	public void start(BundleContext context) throws Exception {
 		
@@ -17,7 +17,6 @@ public class Activator implements BundleActivator {
 		
 		serviceRegistration1 = context.registerService(IDB.class.getName(),db,null);
 		
-		db.dbConn();
 		
 	}
 

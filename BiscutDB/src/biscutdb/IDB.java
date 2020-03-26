@@ -1,6 +1,6 @@
 package biscutdb;
 
-import com.mysql.jdbc.Connection;
+import java.sql.Connection;
 
 public interface IDB {
 	public Connection dbConn();
