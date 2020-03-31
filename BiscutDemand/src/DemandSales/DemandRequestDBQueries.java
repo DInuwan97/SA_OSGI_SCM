@@ -10,6 +10,7 @@ import javax.swing.JOptionPane;
 
 import biscutdb.DB;
 import biscutdb.IDB;
+import biscutdemand.Activator;
 
 
 public class DemandRequestDBQueries implements IdemandRequstDBQueries {
@@ -20,12 +21,11 @@ public class DemandRequestDBQueries implements IdemandRequstDBQueries {
 	private IDB db;
 	private ResultSet resultSet;
 	
-	
 	public  DemandRequestDBQueries() {
-		db = new DB();
-		conn = db.dbConn();
+		//Activator.idb = new DB();
+		conn = Activator.idb.dbConn();
 	}
-	
+		
 	@Override
 	public boolean insertDemandReq(SalesDemandMsgModel salesDemandMsgModel) {
 		// TODO Auto-generated method stub
@@ -94,6 +94,22 @@ public class DemandRequestDBQueries implements IdemandRequstDBQueries {
 			ex.printStackTrace();
 		}
 		
+		return resultSet;
+	}
+	
+	@Override
+	public ResultSet LoadSalesMessages() {
+		// TODO Auto-generated method stub
+		String sql = "SELECT * FROM msgInfo";	
+		try {	
+			System.out.println("Con is : " +conn);
+			statement = conn.createStatement();
+			resultSet = statement.executeQuery(sql);
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+			
 		return resultSet;
 	}
 

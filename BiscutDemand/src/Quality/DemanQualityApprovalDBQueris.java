@@ -7,6 +7,7 @@ import java.sql.Statement;
 
 import biscutdb.DB;
 import biscutdb.IDB;
+import biscutdemand.Activator;
 
 public class DemanQualityApprovalDBQueris implements IDemandQualityApproval{
 
@@ -17,11 +18,9 @@ public class DemanQualityApprovalDBQueris implements IDemandQualityApproval{
 	private ResultSet resultSet;
 	
 	
-	public  DemanQualityApprovalDBQueris() {
-		db = new DB();
-		conn = db.dbConn();
+	public DemanQualityApprovalDBQueris() {
+		conn = Activator.idb.dbConn();
 	}
-	
 	
 	@Override
 	public ResultSet viewDemandRequstbyId(int id) {

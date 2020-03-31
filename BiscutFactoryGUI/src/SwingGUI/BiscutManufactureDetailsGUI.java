@@ -32,6 +32,7 @@ import DemandSales.IdemandRequstDBQueries;
 import DemandSales.SalesDemandJunction;
 import Quality.DemanQualityApprovalDBQueris;
 import Quality.IDemandQualityApproval;
+import biscutfactorygui.Activator;
 import biscutfactorygui.DateLabelFormatter;
 import biscutmanafacture.BiscutManafactureJunction;
 import biscutmanafacture.BiscutModel;
@@ -64,18 +65,15 @@ public class BiscutManufactureDetailsGUI  {
 	private JTextField txtSearch;
 	private JTable table_1;
 	
-	
-	private IBiscuitManufactureDBQuries iBiscuitManufactureDBQuries;
-	private IDemandQualityApproval iDemandQualityApproval;
 
 	/**
 	 * Launch the application.
 	 */
-	public static void executeMainGUI(ManufactureStore manufactureStore) {
+	public static void executeMainGUI() {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					BiscutManufactureDetailsGUI window = new BiscutManufactureDetailsGUI(manufactureStore);
+					BiscutManufactureDetailsGUI window = new BiscutManufactureDetailsGUI();
 					window.frame.setVisible(true);
 					
 				} catch (Exception e) {
@@ -91,8 +89,8 @@ public class BiscutManufactureDetailsGUI  {
 	
 
 	
-	public BiscutManufactureDetailsGUI(ManufactureStore manufactureStore) {
-		initialize(manufactureStore);
+	public BiscutManufactureDetailsGUI() {
+		initialize();
 		
 		
 	}
@@ -100,7 +98,7 @@ public class BiscutManufactureDetailsGUI  {
 	/**
 	 * Initialize the contents of the frame.
 	 */
-	private void initialize(ManufactureStore  manufactureStore) {
+	private void initialize() {
 		
 		frame = new JFrame();
 		frame.setBounds(0, 0, 1366, 768);
@@ -313,11 +311,7 @@ public class BiscutManufactureDetailsGUI  {
 		frame.getContentPane().add(startPickerImpl_ExpDate);
 		
 
-		iBiscuitManufactureDBQuries = new ManufactureBiscuitDBQueries();
-		iDemandQualityApproval = new DemanQualityApprovalDBQueris();
-		
-		
-		
+
 		
 		//Demand Id select from Demand ID Combo Box
 		comboDemandId.addItem("Select Demand Request ID...");
@@ -357,8 +351,8 @@ public class BiscutManufactureDetailsGUI  {
 		JMenu mnManufacture = new JMenu("Manufacture Controlling");
 		mnManufacture.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				ManufactureStore manufactureStore = new BiscutManafactureJunction();
-				BiscutManufactureDetailsGUI.executeMainGUI(manufactureStore);
+				//ManufactureStore manufactureStore = new BiscutManafactureJunction();
+				//BiscutManufactureDetailsGUI.executeMainGUI();
 			}
 		});
 		menuBar.add(mnManufacture);
@@ -367,7 +361,7 @@ public class BiscutManufactureDetailsGUI  {
 		mnDemandForecasting.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Idemand iDemand = new SalesDemandJunction();
-				DemandRequestGUI.executeDemandGUI(iDemand);
+				DemandRequestGUI.executeDemandGUI();
 			}
 		});
 		menuBar.add(mnDemandForecasting);
@@ -385,7 +379,7 @@ public class BiscutManufactureDetailsGUI  {
 		menuBar.add(mnTransportManagement);
 		
 		
-		ResultSet rs_DemandID_combo = iDemandQualityApproval.viewAllDemandRequstes();
+		ResultSet rs_DemandID_combo = Activator.iDemandQualityApproval.viewAllDemandRequstes();
 		
 		try {
 			while(rs_DemandID_combo.next()) {
@@ -407,7 +401,7 @@ public class BiscutManufactureDetailsGUI  {
 							
 						try {
 														
-							ResultSet rs1 = iDemandQualityApproval.viewDemandRequstbyId(Integer.parseInt(comboDemandId.getSelectedItem().toString()));
+							ResultSet rs1 = Activator.iDemandQualityApproval.viewDemandRequstbyId(Integer.parseInt(comboDemandId.getSelectedItem().toString()));
 							
 							while(rs1.next()) {
 								txtProductionInfo.setText(rs1.getString("productdetails"));
@@ -442,6 +436,9 @@ public class BiscutManufactureDetailsGUI  {
 					
 					if(x==0) {
 						
+						
+						
+						
 						System.out.println("Man DAte : " +manDate);
 						biscutModel.setBiscutName(categories.getSelectedItem().toString());
 						biscutModel.setExpireDate(expDate);
@@ -453,10 +450,10 @@ public class BiscutManufactureDetailsGUI  {
 						biscutModel.setDemandReqId(Integer.parseInt(comboDemandId.getSelectedItem().toString()));
 						
 						
-						manufactureStore.createBiscut(biscutModel);
+						Activator.manufactureStore.createBiscut(biscutModel);
 						
 						//getting ack after insert to db
-						Boolean result =  manufactureStore.isBiscutProductionInsertered();
+						Boolean result =  Activator.manufactureStore.isBiscutProductionInsertered();
 						
 						if(result == true) {
 							//updateManufatureDataTable();
@@ -479,12 +476,11 @@ public class BiscutManufactureDetailsGUI  {
 		
 		
 		
-		
 		//search manufacture id
 				txtSearch.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						
-						ResultSet rs_Searched_biscuit_details = iBiscuitManufactureDBQuries.searchManufaturedProduct(Integer.parseInt(txtSearch.getText().toString()));
+						ResultSet rs_Searched_biscuit_details = Activator.iBiscuitManufactureDBQuries.searchManufaturedProduct(Integer.parseInt(txtSearch.getText().toString()));
 						
 						try {
 							if(rs_Searched_biscuit_details.next()) {
@@ -512,9 +508,7 @@ public class BiscutManufactureDetailsGUI  {
 					}
 				});
 				
-				
-				
-				
+							
 				//UPDATE BISCUIT DETAILS
 				btnUpdateProduct.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
@@ -526,7 +520,7 @@ public class BiscutManufactureDetailsGUI  {
 						int x = JOptionPane.showConfirmDialog(null, "Do you want to Update this record ? ");
 						if(x == 0) {
 							
-							//biscutModel.setBiscutName(categories.getSelectedItem().toString());
+				
 							biscutModel.setBiscutName(categories.getSelectedItem().toString());
 							biscutModel.setExpireDate(expDate);
 							biscutModel.setManufactureDate(manDate);
@@ -535,7 +529,7 @@ public class BiscutManufactureDetailsGUI  {
 							biscutModel.setNoOfMachines(Integer.parseInt(txtMachines.getText().toString()));
 							biscutModel.setNumOfEmployees(Integer.parseInt(txtEmployees.getText().toString()));
 							
-							Boolean result = iBiscuitManufactureDBQuries.updateManufactureProductDetails(biscutModel);
+							Boolean result = Activator.iBiscuitManufactureDBQuries.updateManufactureProductDetails(biscutModel);
 							if(result == true) {
 								
 								JOptionPane.showMessageDialog(null, "Successfully Updated!!!");
@@ -548,17 +542,13 @@ public class BiscutManufactureDetailsGUI  {
 					}
 				});
 				
-				
-		
-		
 		
 	}
 	
 	public void updateManufatureDataTable() {
+	
 		
-		iBiscuitManufactureDBQuries = new ManufactureBiscuitDBQueries();
-		
-		ResultSet rs2 = iDemandQualityApproval.viewAllDemandRequstes();
+		ResultSet rs2 = Activator.iDemandQualityApproval.viewAllDemandRequstes();
 		try {
 			while(rs2.next()) {
 				
@@ -572,14 +562,13 @@ public class BiscutManufactureDetailsGUI  {
 				v.add(rs2.getString("demadReason"));
 				dtm.addRow(v);
 			}
-			
-			
+					
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
-		ResultSet rs3 = iBiscuitManufactureDBQuries.getAllManfautureProducts();
+		ResultSet rs3 = Activator.iBiscuitManufactureDBQuries.getAllManfautureProducts();
 		
 		try {
 			while(rs3.next()) {

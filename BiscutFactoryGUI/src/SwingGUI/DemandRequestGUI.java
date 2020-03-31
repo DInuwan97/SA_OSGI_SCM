@@ -34,11 +34,11 @@ import DemandSales.SalesDemandMsgModel;
 import DemandSales.SalesMessageDetailsModel;
 import Quality.DemanQualityApprovalDBQueris;
 import Quality.IDemandQualityApproval;
+import biscutfactorygui.Activator;
 import biscutfactorygui.BackEndDetails;
 import biscutfactorygui.BackEndMessageDetailsModel;
 import biscutfactorygui.DateLabelFormatter;
 import biscutfactorygui.DemandRequestDataModel;
-import biscutfactorygui.IBackEnd;
 import biscutmanafacture.BiscutManafactureJunction;
 import biscutmanafacture.ManufactureStore;
 
@@ -62,8 +62,7 @@ public class DemandRequestGUI {
 	
 	//varible for initialize messageId for future use
 	private int salesMessageId;
-	private IBackEnd iBackEnd;
-	private Idemand iDemand;
+	//private Idemand iDemand;
 	private File dataInsertFileName;
 	private FileWriter fileWriter;
 	private PrintWriter printWriter;
@@ -82,8 +81,7 @@ public class DemandRequestGUI {
 	private JTable table;
 	private JTable table_1;
 	
-	private IDemandQualityApproval iDemandQualityApproval;
-	private IdemandRequstDBQueries idemandRequstDBQueries;
+	
 	private JTextField textField;
 	private JTextField textField_1;
 	
@@ -94,11 +92,11 @@ public class DemandRequestGUI {
 	/**
 	 * Launch the application.
 	 */
-	public static void executeDemandGUI(Idemand iDemand)  {
+	public static void executeDemandGUI()  {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					DemandRequestGUI window = new DemandRequestGUI(iDemand);
+					DemandRequestGUI window = new DemandRequestGUI();
 					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -112,13 +110,13 @@ public class DemandRequestGUI {
 	 */
 
 	
-	public DemandRequestGUI(Idemand iDemand) {
-		initialize(iDemand);
+	public DemandRequestGUI() {
+		initialize();
 		
-		idemandRequstDBQueries = new DemandRequestDBQueries();
-		iDemandQualityApproval = new DemanQualityApprovalDBQueris();
+	//	Activator.idemandRequstDBQueries = new DemandRequestDBQueries();
+		//Activator.iDemandQualityApproval = new DemanQualityApprovalDBQueris();
 		
-		ResultSet rs2 = iDemandQualityApproval.viewAllDemandRequstes();
+		ResultSet rs2 = Activator.iDemandQualityApproval.viewAllDemandRequstes();
 		try {
 			while(rs2.next()) {
 				
@@ -147,7 +145,7 @@ public class DemandRequestGUI {
 	/**
 	 * Initialize the contents of the frame.
 	 */
-	private void initialize(Idemand iDemand) {
+	private void initialize() {
 		frame = new JFrame();
 		frame.setBounds(0, 0, 1366, 768);
 		frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
@@ -177,9 +175,8 @@ public class DemandRequestGUI {
 				txtProductName.grabFocus();
 			}
 		});
-//		txtReqDate.setColumns(10);
-//		txtReqDate.setBounds(535, 293, 239, 34);
-//		frame.getContentPane().add(txtReqDate);
+
+		
 		
 		JButton btnDelete = new JButton("DELETE ");
 
@@ -273,7 +270,7 @@ public class DemandRequestGUI {
 		mnManufacture.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				ManufactureStore manufactureStore = new BiscutManafactureJunction();
-				BiscutManufactureDetailsGUI.executeMainGUI(manufactureStore);
+				BiscutManufactureDetailsGUI.executeMainGUI();
 			}
 		});
 		menuBar.add(mnManufacture);
@@ -281,8 +278,8 @@ public class DemandRequestGUI {
 		JMenu mnDemandForecasting = new JMenu("Demand Forecasting");
 		mnDemandForecasting.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Idemand iDemand = new SalesDemandJunction();
-				DemandRequestGUI.executeDemandGUI(iDemand);
+				Activator.iDemand = new SalesDemandJunction();
+				DemandRequestGUI.executeDemandGUI();
 			}
 		});
 		menuBar.add(mnDemandForecasting);
@@ -379,16 +376,17 @@ public class DemandRequestGUI {
 	
 		
 		//creating the reference of SQL Backend
-		iBackEnd = new BackEndDetails();
-		IdemandRequstDBQueries idemandRequstDBQueries = new DemandRequestDBQueries();
+		Activator.idemandRequstDBQueries = new DemandRequestDBQueries();
 	
 		//salese msg model
 		SalesDemandMsgModel salesDemandMsgModel = new SalesDemandMsgModel();			
 		
 		
+		
+		
 		//filling data to the combo box
 		try {
-			ResultSet rs = iBackEnd.LoadSalesMessages();
+			ResultSet rs = Activator.idemandRequstDBQueries.LoadSalesMessages();
 			while(rs.next()) {
 				
 				comboBox.addItem(rs.getString("msgId"));
@@ -408,7 +406,7 @@ public class DemandRequestGUI {
 						
 						try {
 						
-							ResultSet rs1 = idemandRequstDBQueries.getSelectedSalesMessage(Integer.parseInt(comboBox.getSelectedItem().toString()));
+							ResultSet rs1 = Activator.idemandRequstDBQueries.getSelectedSalesMessage(Integer.parseInt(comboBox.getSelectedItem().toString()));
 							
 							if(rs1.next()) {
 								txtDescription.setText(rs1.getString("message")); 
@@ -438,7 +436,7 @@ public class DemandRequestGUI {
 			public void actionPerformed(ActionEvent e) {
 				
 				salesDemandMsgModel.setMsgId(Integer.parseInt(comboBox.getSelectedItem().toString()));
-				boolean result = idemandRequstDBQueries.deleteSalesMsg(salesDemandMsgModel.getMsgId());
+				boolean result = Activator.idemandRequstDBQueries.deleteSalesMsg(salesDemandMsgModel.getMsgId());
 				
 				int x= JOptionPane.showConfirmDialog(null,"Do you want to Delete this record ?");
 				if(x == 0) {
@@ -552,7 +550,7 @@ public class DemandRequestGUI {
 						salesDemandMsgModel.setDescription(textReason.getText());
 						
 
-						Boolean result = idemandRequstDBQueries.insertDemandReq(salesDemandMsgModel);
+						Boolean result = Activator.idemandRequstDBQueries.insertDemandReq(salesDemandMsgModel);
 						if(result == true) {
 							
 							//send to the BiscutDemand Bundle
@@ -606,7 +604,7 @@ public class DemandRequestGUI {
 		salesDemandMsgModel.setDate_1(date_1);
 		salesDemandMsgModel.setDate_2(date_2);
 		
-		ResultSet rs_betweenDates = idemandRequstDBQueries.viewDemandsOnDate(salesDemandMsgModel);
+		ResultSet rs_betweenDates = Activator.idemandRequstDBQueries.viewDemandsOnDate(salesDemandMsgModel);
 		
 		try {
 			

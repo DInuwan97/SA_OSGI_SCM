@@ -11,8 +11,19 @@ import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
+import DemandSales.Idemand;
+import DemandSales.IdemandRequstDBQueries;
+import Quality.IDemandQualityApproval;
+
 public class Welcome {
 
+	//Demand Bundle
+	private Idemand idemand;
+	private IdemandRequstDBQueries idemandRequstDBQueries;
+	private IDemandQualityApproval iDemandQualityApproval;
+	
+	
+	
 	private JFrame frame;
 
 	/**
@@ -162,9 +173,20 @@ public class Welcome {
 	}
 	
 	public void display() {
-		MenuWindow.executeMenuWindow();
+		//MenuWindow.executeMenuWindow();
+		//frame.setVisible(false);
 		
+		UserLoginGUI.executeLogin();
 		frame.setVisible(false);
+	}
+	
+	
+	
+	
+	public static void sendReferences(Idemand idemand,IdemandRequstDBQueries idemandRequstDBQueries,IDemandQualityApproval iDemandQualityApproval) {
+		idemand = idemand;
+		idemandRequstDBQueries = idemandRequstDBQueries;
+		iDemandQualityApproval = iDemandQualityApproval;
 	}
 	
 	

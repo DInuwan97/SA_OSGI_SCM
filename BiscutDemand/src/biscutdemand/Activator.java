@@ -21,26 +21,35 @@ public class Activator implements BundleActivator {
 	ServiceReference serviceReference1,serviceReference2;
 	ServiceReference referenceDb;
 	
+	
+	
+	public static IDB idb;
+	
 	public void start(BundleContext context) throws Exception {
 		System.out.println("Biscut Demand Subscriber Start");
+		
+		referenceDb = context.getServiceReference(IDB.class.getName());
+		idb = (IDB) context.getService(referenceDb);
 		
 		//////////////////////////Registerting Service//////////////////////////////////////
 		Idemand iDemand = new SalesDemandJunction();
 		serviceRegistration1 = context.registerService(Idemand.class.getName(),iDemand, null);
 		
+		
 		IdemandRequstDBQueries idemandRequstDBQueries = new DemandRequestDBQueries();
 		serviceRegistration2 = context.registerService(IdemandRequstDBQueries.class.getName(),idemandRequstDBQueries, null);
 		
-			//for sachin
+		//for sachin
 		IDemandQualityApproval iDemandQualityApproval = new DemanQualityApprovalDBQueris();
 		serviceRegistration3 = context.registerService(IDemandQualityApproval.class.getName(), iDemandQualityApproval, null);
 		
-				
-		
-		
+					
 		//////////////////////////Referencing Service//////////////////////////////////////
 		serviceReference1 = context.getServiceReference(ManufactureStore.class.getName());
 		ManufactureStore manufactureStore = (ManufactureStore)context.getService(serviceReference1);
+		
+
+	
 	
 	}
 

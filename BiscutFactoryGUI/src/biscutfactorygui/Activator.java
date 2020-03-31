@@ -24,10 +24,17 @@ public class Activator implements BundleActivator {
 
 	
 	
-	ServiceReference serviceReference1,serviceReference2,serviceReference3,serviceReference4,serviceReference5;
-	ServiceReference serviceReferenceDb;
+	static ServiceReference serviceReference1,serviceReference2,serviceReference3,serviceReference4,serviceReference5,serviceReference6;
+	static ServiceReference serviceReferenceDb;
+	static ServiceReference serviceReferenceIdemand;
+	static ServiceReference serviceReferenceUser,serviceReferenceSMS;
 	
-	ServiceReference serviceReferenceUser;
+	public static ManufactureStore manufactureStore;
+	public static Idemand iDemand;
+	public static IdemandRequstDBQueries idemandRequstDBQueries; 
+	public static IDemandQualityApproval iDemandQualityApproval;
+	public static IBiscuitManufactureDBQuries iBiscuitManufactureDBQuries;
+	public static IStakeHolder iStakeHolder;
 	
 	public void start(BundleContext context) throws Exception {
 		
@@ -46,49 +53,38 @@ public class Activator implements BundleActivator {
 		
 		//demand request reference
 		serviceReference2 = context.getServiceReference(Idemand.class.getName());
-		Idemand iDemand = (Idemand)context.getService(serviceReference2);
+		iDemand = (Idemand)context.getService(serviceReference2);
 		
 		//demand DBQueries reference
 		serviceReference3 = context.getServiceReference(IdemandRequstDBQueries.class.getName());
-		IdemandRequstDBQueries idemandRequstDBQueries = (IdemandRequstDBQueries)context.getService(serviceReference3);
+		idemandRequstDBQueries = (IdemandRequstDBQueries)context.getService(serviceReference3);
 		
 		//deamdn quality for sachin
 		serviceReference5 = context.getServiceReference(IDemandQualityApproval.class.getName());
-		IDemandQualityApproval iDemandQualityApproval = (IDemandQualityApproval) context.getService(serviceReference5);
+		iDemandQualityApproval = (IDemandQualityApproval) context.getService(serviceReference5);
 		
 		
 		//getting DBQeries from manufature
 		serviceReference4 = context.getServiceReference(IBiscuitManufactureDBQuries.class.getName());
-		IBiscuitManufactureDBQuries idBiscuitManufactureDBQuries = (IBiscuitManufactureDBQuries)context.getService(serviceReference4);
+		iBiscuitManufactureDBQuries = (IBiscuitManufactureDBQuries)context.getService(serviceReference4);
 		//execute main window
 		
 		
 		//uSers
 		serviceReferenceUser = context.getServiceReference(IStakeHolder.class.getName());
-		IStakeHolder iStakeHolder = (IStakeHolder)context.getService(serviceReferenceUser);
+		iStakeHolder = (IStakeHolder)context.getService(serviceReferenceUser);
 
 		
+//		serviceReferenceSMS = context.getServiceReference(ISms.class.getName());
+//		isms = (ISms) context.getService(serviceReferenceSMS);
 		
 		
 		//UserLoginGUI.executeLogin();
-		
+	
 		Welcome welcomeWindow = new Welcome();
 		welcomeWindow.executeWelcomeWindow();
-		//MenuWindow menuWindow = new MenuWindow();
-		//menuWindow.executeMenuWindow();
-		
-		
-//		BiscutModel biscutModel = new BiscutModel();
-//		BiscutManufactureDetailsGUI biscutManufactureDetailsGUI = new BiscutManufactureDetailsGUI(manufactureStore, biscutModel);
-//		biscutManufactureDetailsGUI.executeMainGUI(manufactureStore, biscutModel);
 
-		
-		///BackEndMessageDetailsModel bsd = new BackEndMessageDetailsModel();
-		
-		//BackEndDetails bc = new BackEndDetails();
-		//bc.LoadSalesMessages();
-		
-		
+
 		
 	}
 
@@ -99,6 +95,7 @@ public class Activator implements BundleActivator {
 		context.ungetService(serviceReference2);
 		context.ungetService(serviceReference3);
 		context.ungetService(serviceReference4);
+		context.ungetService(serviceReferenceSMS);
 	}
 
 }

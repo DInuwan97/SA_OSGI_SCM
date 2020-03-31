@@ -35,27 +35,6 @@ public class Activator implements BundleActivator {
 		
 		
 		
-		//////////////////////////////////////Subscribe Bundles///////////////////////////////////////////////////////////////////
-		//referenceDb = context.getServiceReference(IDB.class.getName());
-		//IDB db= (IDB)context.getService(referenceDb);
-				
-		//db.dbConn();
-
-		/*BiscutModel biscutModel = new BiscutModel();
-		referenceGUI = context.getServiceReference(GUI.class.getName());
-		GUI gui = (BiscutManufactureDetails)context.getService(referenceGUI);
-		gui.executeMainGUI(manufactureStore, biscutModel);		*/
-		
-		//GUI
-		//BiscutModel biscutModel = new BiscutModel();
-	//	BiscutManufactureDetails manufactGUI = new BiscutManufactureDetails(manufactureStore,biscutModel);
-		//manufactGUI.executeMainGUI(manufactureStore,biscutModel);
-		
-		
-		
-		
-		
-		
 	}
 
 	public void stop(BundleContext context) throws Exception {

@@ -7,6 +7,7 @@ import javax.swing.JFrame;
 import DemandSales.Idemand;
 import DemandSales.SalesDemandJunction;
 import DemandSales.SalesDemandMsgModel;
+import biscutfactorygui.Activator;
 import biscutmanafacture.BiscutManafactureJunction;
 import biscutmanafacture.BiscutModel;
 import biscutmanafacture.ManufactureStore;
@@ -19,6 +20,7 @@ import java.awt.event.ActionEvent;
 
 public class MenuWindow extends JFrame{
 
+	
 	private JFrame frame;
 
 	/**
@@ -114,8 +116,8 @@ public class MenuWindow extends JFrame{
 		//Add Manufacture Product
 		btnManufact.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				ManufactureStore manufactureStore = new BiscutManafactureJunction();
-				BiscutManufactureDetailsGUI.executeMainGUI(manufactureStore);
+				Activator.manufactureStore = new BiscutManafactureJunction();
+				BiscutManufactureDetailsGUI.executeMainGUI();
 				frame.setVisible(false);
 				//displayManufactureGUI();
 				
@@ -127,8 +129,8 @@ public class MenuWindow extends JFrame{
 		btnDemand.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				Idemand iDemand = new SalesDemandJunction();
-				DemandRequestGUI.executeDemandGUI(iDemand);
+				Activator.iDemand= new SalesDemandJunction();
+				DemandRequestGUI.executeDemandGUI();
 							
 			}
 		});
