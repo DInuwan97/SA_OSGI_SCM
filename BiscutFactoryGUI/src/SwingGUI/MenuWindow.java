@@ -7,6 +7,8 @@ import javax.swing.JFrame;
 import DemandSales.Idemand;
 import DemandSales.SalesDemandJunction;
 import DemandSales.SalesDemandMsgModel;
+import DinukaGUI.SalesGui;
+import DinukaGUI.TransportationGui;
 import biscutfactorygui.Activator;
 import biscutmanafacture.BiscutManafactureJunction;
 import biscutmanafacture.BiscutModel;
@@ -78,11 +80,29 @@ public class MenuWindow extends JFrame{
 		frame.getContentPane().add(btnWearhousing);
 		
 		JButton btnSalesForecasting = new JButton("Sales Forecasting");
+		
+		//dinuka
+		btnSalesForecasting.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				SalesGui.executeSalesGUI();			
+			}
+		});
+		
+		
 		btnSalesForecasting.setFont(new Font("Tahoma", Font.BOLD, 30));
 		btnSalesForecasting.setBounds(56, 383, 437, 62);
 		frame.getContentPane().add(btnSalesForecasting);
 		
 		JButton btnTransportManagement = new JButton("Transport Management");
+		
+		//dinuka
+		btnTransportManagement.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				TransportationGui.excecuteTransportGUI();
+			}
+		});
+		//dinuka
+		
 		btnTransportManagement.setFont(new Font("Tahoma", Font.BOLD, 30));
 		btnTransportManagement.setBounds(555, 383, 437, 62);
 		frame.getContentPane().add(btnTransportManagement);
@@ -105,6 +125,7 @@ public class MenuWindow extends JFrame{
 		JButton btnFinaceManagement = new JButton("Finace Management");
 		btnFinaceManagement.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
 			}
 		});
 		btnFinaceManagement.setFont(new Font("Tahoma", Font.BOLD, 30));

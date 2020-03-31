@@ -18,7 +18,10 @@ import biscutdb.IDB;
 import biscutmanafacture.BiscutModel;
 import biscutmanafacture.IBiscuitManufactureDBQuries;
 import biscutmanafacture.ManufactureStore;
+import salespublisher.SalesService;
 import stakeholdermanagement.IStakeHolder;
+import tranportationpublisher.TransportationService;
+import tranportationpublisher.TransportationVehicle;
 
 public class Activator implements BundleActivator {
 
@@ -29,12 +32,28 @@ public class Activator implements BundleActivator {
 	static ServiceReference serviceReferenceIdemand;
 	static ServiceReference serviceReferenceUser,serviceReferenceSMS;
 	
+	//dinuka
+	static ServiceReference transporationServiceReference;
+	static ServiceReference transportationVehicleServiceReference;
+	static ServiceReference saleServiceReferenceSales;
+	//dinuka
+	
+	
+	
 	public static ManufactureStore manufactureStore;
 	public static Idemand iDemand;
 	public static IdemandRequstDBQueries idemandRequstDBQueries; 
 	public static IDemandQualityApproval iDemandQualityApproval;
 	public static IBiscuitManufactureDBQuries iBiscuitManufactureDBQuries;
 	public static IStakeHolder iStakeHolder;
+	
+	//Dinuka
+	public static TransportationService transportationService;
+	public static TransportationVehicle transportationVehicle;
+	public static SalesService salesService;
+	
+	
+	//Dinuka
 	
 	public void start(BundleContext context) throws Exception {
 		
@@ -74,12 +93,23 @@ public class Activator implements BundleActivator {
 		serviceReferenceUser = context.getServiceReference(IStakeHolder.class.getName());
 		iStakeHolder = (IStakeHolder)context.getService(serviceReferenceUser);
 
+
 		
-//		serviceReferenceSMS = context.getServiceReference(ISms.class.getName());
-//		isms = (ISms) context.getService(serviceReferenceSMS);
+		//Dinuka
+		//System.out.println("Started the transporation service refernece");
+		transporationServiceReference = context.getServiceReference(TransportationService.class.getName());
+		transportationService = (TransportationService) context.getService(transporationServiceReference);
+		
+		transportationVehicleServiceReference = context.getServiceReference(TransportationVehicle.class.getName());
+		transportationVehicle =  (TransportationVehicle)context.getService(transportationVehicleServiceReference);
+		
+		saleServiceReferenceSales = context.getServiceReference(SalesService.class.getName());
+		salesService = (SalesService) context.getService(saleServiceReferenceSales);
 		
 		
-		//UserLoginGUI.executeLogin();
+		
+		
+		//Dinuka
 	
 		Welcome welcomeWindow = new Welcome();
 		welcomeWindow.executeWelcomeWindow();
@@ -96,6 +126,17 @@ public class Activator implements BundleActivator {
 		context.ungetService(serviceReference3);
 		context.ungetService(serviceReference4);
 		context.ungetService(serviceReferenceSMS);
+		//dinuwan
+		
+		
+		
+		//dinuka
+		System.out.println("TransportationGUIActivator Stopped");
+		context.ungetService(transporationServiceReference);
+		context.ungetService(transportationVehicleServiceReference);
+		
+		
+		
 	}
 
 }
