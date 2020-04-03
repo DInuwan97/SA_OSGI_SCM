@@ -11,8 +11,6 @@ CREATE TABLE `biscuitfactory`.`manufacturedetails` (
   PRIMARY KEY (`manufactureId`));
 
 
-
-
 CREATE TABLE `biscuitfactory`.`msginfo` (
   `msgId` INT NOT NULL AUTO_INCREMENT,
   `salesId` INT NOT NULL,
@@ -20,8 +18,6 @@ CREATE TABLE `biscuitfactory`.`msginfo` (
   `addedDate` VARCHAR(200) NULL,
   `addedTime` VARCHAR(200) NULL,
   PRIMARY KEY (`msgId`));
-
-
 
 CREATE TABLE `biscuitfactory`.`demandrequests` (
   `demandReqId` INT NOT NULL AUTO_INCREMENT,

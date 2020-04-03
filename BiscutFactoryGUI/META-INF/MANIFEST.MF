@@ -15,6 +15,7 @@ Import-Package: DemandSales,
  org.jdatepicker.i18n,
  org.jdatepicker.impl,
  org.jdatepicker.util,
- org.osgi.framework;version="1.3.0",
- stakeholdermanagement
+ org.osgi.framework;version="1.3.0"
+Export-Package: biscutfactorygui,
+ SwingGUI
 
