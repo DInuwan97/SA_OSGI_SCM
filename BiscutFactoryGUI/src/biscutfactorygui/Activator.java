@@ -7,6 +7,7 @@ import org.osgi.framework.ServiceRegistration;
 
 import DemandSales.Idemand;
 import DemandSales.IdemandRequstDBQueries;
+import Logistics.LogisticsGui;
 import Quality.IDemandQualityApproval;
 import SwingGUI.BiscutManufactureDetailsGUI;
 import SwingGUI.DemandRequestGUI;
@@ -14,14 +15,21 @@ import SwingGUI.GUI;
 import SwingGUI.MenuWindow;
 import SwingGUI.UserLoginGUI;
 import SwingGUI.Welcome;
+import Warehouse.AddRawMaterial;
+import Warehouse.FinalProducts;
+import Warehouse.RawMaterials;
+import Warehouse.UpdateFinalProduct;
+import Warehouse.UpdateRawMaterial;
 import biscutdb.IDB;
 import biscutmanafacture.BiscutModel;
 import biscutmanafacture.IBiscuitManufactureDBQuries;
 import biscutmanafacture.ManufactureStore;
+import logistics.Logistics;
 import salespublisher.SalesService;
 import stakeholdermanagement.IStakeHolder;
 import tranportationpublisher.TransportationService;
 import tranportationpublisher.TransportationVehicle;
+import warehouse.Warehouse;
 
 public class Activator implements BundleActivator {
 
@@ -38,6 +46,11 @@ public class Activator implements BundleActivator {
 	static ServiceReference saleServiceReferenceSales;
 	//dinuka
 	
+	
+	//pawan
+	private ServiceReference<?> warehouseServiceRef;
+	private ServiceReference<?> logisticsServiceRef;
+	//pawan
 	
 	
 	public static ManufactureStore manufactureStore;
@@ -105,11 +118,27 @@ public class Activator implements BundleActivator {
 		
 		saleServiceReferenceSales = context.getServiceReference(SalesService.class.getName());
 		salesService = (SalesService) context.getService(saleServiceReferenceSales);
-		
-		
-		
-		
 		//Dinuka
+		
+		
+		
+		//pawan
+		logisticsServiceRef = context.getServiceReference(Logistics.class.getName());
+		Logistics logistics = (Logistics) context.getService(logisticsServiceRef);
+		LogisticsGui.logistics = logistics;
+		
+		warehouseServiceRef = context.getServiceReference(Warehouse.class.getName());
+		Warehouse warehouse = (Warehouse)context.getService(warehouseServiceRef);
+		
+		AddRawMaterial.warh = warehouse;
+		RawMaterials.warh = warehouse;
+		FinalProducts.warh = warehouse;
+		UpdateFinalProduct.warh = warehouse;
+		UpdateRawMaterial.warh = warehouse;
+		//pawan
+
+		
+		
 	
 		Welcome welcomeWindow = new Welcome();
 		welcomeWindow.executeWelcomeWindow();

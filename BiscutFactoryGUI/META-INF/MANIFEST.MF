@@ -10,6 +10,7 @@ Import-Package: DemandSales,
  biscutdb,
  biscutdemand,
  biscutmanafacture,
+ logistics,
  org.jdatepicker,
  org.jdatepicker.graphics,
  org.jdatepicker.i18n,
@@ -18,6 +19,7 @@ Import-Package: DemandSales,
  org.osgi.framework;version="1.3.0",
  salespublisher,
  stakeholdermanagement,
- tranportationpublisher
+ tranportationpublisher,
+ warehouse
 
 

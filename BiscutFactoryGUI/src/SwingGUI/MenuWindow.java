@@ -9,6 +9,8 @@ import DemandSales.SalesDemandJunction;
 import DemandSales.SalesDemandMsgModel;
 import DinukaGUI.SalesGui;
 import DinukaGUI.TransportationGui;
+import Logistics.LogisticsGui;
+import Warehouse.WarehouseManager;
 import biscutfactorygui.Activator;
 import biscutmanafacture.BiscutManafactureJunction;
 import biscutmanafacture.BiscutModel;
@@ -73,6 +75,8 @@ public class MenuWindow extends JFrame{
 		JButton btnWearhousing = new JButton("Wearhousing");
 		btnWearhousing.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
+				WarehouseManager.executeWarehousGUI();
 			}
 		});
 		btnWearhousing.setFont(new Font("Tahoma", Font.BOLD, 30));
@@ -108,6 +112,14 @@ public class MenuWindow extends JFrame{
 		frame.getContentPane().add(btnTransportManagement);
 		
 		JButton btnLogisticManagement = new JButton("Logistics Management");
+		
+		btnLogisticManagement.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				LogisticsGui.executeLogisticGUI();
+			}
+		});
+		
+		
 		btnLogisticManagement.setFont(new Font("Tahoma", Font.BOLD, 30));
 		btnLogisticManagement.setBounds(1046, 383, 437, 62);
 		frame.getContentPane().add(btnLogisticManagement);
