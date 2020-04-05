@@ -35,8 +35,7 @@ import DemandSales.SalesMessageDetailsModel;
 import Quality.DemanQualityApprovalDBQueris;
 import Quality.IDemandQualityApproval;
 import biscutfactorygui.Activator;
-import biscutfactorygui.BackEndDetails;
-import biscutfactorygui.BackEndMessageDetailsModel;
+
 import biscutfactorygui.DateLabelFormatter;
 import biscutfactorygui.DemandRequestDataModel;
 import biscutmanafacture.BiscutManafactureJunction;

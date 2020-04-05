@@ -2,6 +2,8 @@ package stakeholdermanagement;
 
 public class StakeHolderModel {
 
+	private String username;
+	private String email;
 	private String mobile;
 	private String pwd;
 	private String secureKey;
